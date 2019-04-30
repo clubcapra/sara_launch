@@ -17,10 +17,11 @@ RVIZ=false
 JET=true
 MAPPING=false
 FORCEOFFLINE=false
+SIMULATION=false
 
 LANGUE="en-US"
 
-while getopts "asvhtfJngzl:mo" opt; do
+while getopts "asvhtfJngzl:moS" opt; do
 
   case "$opt" in
     a)
@@ -42,6 +43,7 @@ while getopts "asvhtfJngzl:mo" opt; do
     g) GENIALE=true ;;
     z) RVIZ=true ;;
     l) LANGUE=$OPTARG ;;
+    S) SIMULATION=true ;;
     h)
         echo 'SYNOPSIS:'
         echo ' Sara_total_bringup [options]'
@@ -55,6 +57,7 @@ while getopts "asvhtfJngzl:mo" opt; do
         echo ' -s  activate speech to text'
         echo ' -t  activate teleoperation'
         echo ' -v  activate vision stack'
+        echo ' -S  activate simulation mode'
         echo ' -z  start rviz'
         HELP=true  ;;
   esac
@@ -202,17 +205,21 @@ then
     fi
 
 
-    # Loop forever
-    while true
-    do
-        echo 'waiting for power'
-        while ! check_usb_devices
-        do
-        tree /dev/SARA
-        echo "====================="
-            sleep 1
-        done
 
+        # Loop forever
+        while true
+        do
+
+            if !${SIMULATION}
+            then
+                echo 'waiting for power'
+                while ! check_usb_devices
+                do
+                    tree /dev/SARA
+                    echo "====================="
+                    sleep 1
+                done
+            fi
 
         clear
         echo "======================="
@@ -314,11 +321,18 @@ rostopic pub /say wm_tts/say "sentence: 'Walking Machine. Operationnal.'
 emotion: 0" --once
 
 
-        while check_usb_devices
-        do
-            sleep 1
-        done
-
+        if ${SIMULATION}
+        then
+            while true
+            do
+                sleep 1
+            done
+        else
+            while check_usb_devices
+            do
+                sleep 1
+            done
+        fi
 
 
         ####################################################
