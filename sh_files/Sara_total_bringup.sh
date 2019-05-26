@@ -195,6 +195,7 @@ then
 
     start_terminal_node "FRAME_TO_BOX" 'roslaunch wm_frame_to_box wm_frame_to_box.launch'  "$PIDFILENAMEPERSISTENT"
 
+    start_terminal_node "OPENPIFPAF" 'exec env --ignore-environment /bin/bash'  "$PIDFILENAMEPERSISTENT"
 
     if ${STATEMACHINE}
     then
