@@ -2,11 +2,9 @@ sara_arm_velocity_controller:
   type: "velocity_controllers/JointGroupVelocityController"
   publish_rate: 50               # default: 50
   joints:
-    - right_shoulder_roll_joint
-    - right_shoulder_pitch_joint
-    - right_shoulder_yaw_joint
-    - right_elbow_pitch_joint
-    - right_elbow_yaw_joint
-    - right_wrist_pitch_joint
-    - right_wrist_roll_joint
-    - base_actuator_joint
+   - ca_joint1
+   - ca_joint2
+   - ca_joint3
+   - ca_joint4
+  # - ca_joint5
+  # - ca_joint6
