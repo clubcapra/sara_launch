@@ -6,5 +6,5 @@ sara_arm_velocity_controller:
    - ca_joint2
    - ca_joint3
    - ca_joint4
-  # - ca_joint5
-  # - ca_joint6
+   - ca_joint5
+   - ca_joint6
