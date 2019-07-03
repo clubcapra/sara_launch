@@ -1,4 +1,4 @@
-sara_arm_velocity_controller:
+capra_arm_velocity_controller:
   type: "velocity_controllers/JointGroupVelocityController"
   publish_rate: 50               # default: 50
   joints:
